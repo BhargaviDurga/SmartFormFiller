@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/SmartFormFiller/static/css/main.9b03a7d1.css",
+    "main.js": "/SmartFormFiller/static/js/main.39714682.js",
+    "static/js/453.8ab44547.chunk.js": "/SmartFormFiller/static/js/453.8ab44547.chunk.js",
+    "index.html": "/SmartFormFiller/index.html",
+    "main.9b03a7d1.css.map": "/SmartFormFiller/static/css/main.9b03a7d1.css.map",
+    "main.39714682.js.map": "/SmartFormFiller/static/js/main.39714682.js.map",
+    "453.8ab44547.chunk.js.map": "/SmartFormFiller/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9b03a7d1.css",
+    "static/js/main.39714682.js"
+  ]
+}
