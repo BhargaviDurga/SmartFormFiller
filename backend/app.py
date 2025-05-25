@@ -5,7 +5,11 @@ from form_filler import extract_text_from_id, fill_pdf_form
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 
+
+
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 10000))  # Use Render's PORT
+app.run(host='0.0.0.0', port=port)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for simplicity
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
