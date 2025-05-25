@@ -7,6 +7,9 @@ import PDFPreview from "../components/PDFPreview";
 import { Upload, ArrowLeft, FileText, ExternalLink, Download,Check } from 'lucide-react';
 import './UploadForm.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+
 export default function UploadForm() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,7 +43,7 @@ export default function UploadForm() {
         formData.append('file', pdfFile);
 
         try {
-            const response = await axios.post('http://localhost:5000/fill-form', formData, {
+            const response = await axios.post(`${API_BASE_URL}/fill-form`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

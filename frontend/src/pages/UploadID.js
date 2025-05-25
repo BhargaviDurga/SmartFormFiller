@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Upload, Edit2, Save, RefreshCw, ArrowRight, ChevronDown, Check, X, Repeat, Trash2, Camera, Smartphone, Monitor, RotateCcw } from 'lucide-react';
 import './UploadID.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function UploadID() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,14 +35,13 @@ function UploadID() {
           "Aadhaar Number",
           "Gender",
           "PAN Number",
-          "VID Number",
           "Address"
       ]);
   useEffect(() => {
     // Hide preloader after 5 seconds
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -222,7 +223,7 @@ function UploadID() {
     files.forEach(file => formData.append('files', file));
 
     try {
-      const response = await axios.post('http://localhost:5000/upload-id', formData, {
+      const response = await axios.post(`${API_BASE_URL}/upload-id`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -263,7 +264,7 @@ function UploadID() {
   const handleUpdateData = async () => {
     try {
       setIsLoading(true);
-      await axios.post('http://localhost:5000/update-data', editableData, {
+      await axios.post(`${API_BASE_URL}/update-data`, editableData, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -38,8 +38,12 @@ def extract_text_from_id(image_path):
         - Aadhaar Number (12-digit format)
         - Gender (MALE/FEMALE/OTHER)
         - PAN Number (10-character alphanumeric)
-        - VID Number (16-digit format)
         - Address 
+        - Village/city
+        - District
+        - State
+        - Pincode
+        - Country (India)
 
 
         If any field is missing, try to infer it or return "NOT FOUND".
@@ -59,8 +63,12 @@ def extract_text_from_id(image_path):
         "Aadhaar Number": r"Aadhaar Number:\s*(\d{4}\s?\d{4}\s?\d{4}|\d{12})",  # 4-4-4 or 12-digit format
         "Gender": r"Gender:\s*(MALE|FEMALE|OTHER)",
         "PAN Number": r"PAN Number:\s*(.+)\n",
-        "VID Number": r"VID Number:\s*(\d{16})",
-        "Address": r"Address:\s*([\w\s,.-]+?)(?:\s*(\d{6}))?\s*(?=\n|$)"
+        "Address": r"Address:\s*([\w\s,.-]+?)(?:\s*(\d{6}))?\s*(?=\n|$)",
+        "Village": r"Village:\s*([A-Za-z\s/]+)\n",
+        "District": r"District:\s*([A-Za-z\s/]+)\n",
+        "State": r"State:\s*([A-Za-z\s/]+)\n",
+        "Pincode": r"Pincode:\s*(\d{6})",
+        "Country": r"Country:\s*(India)"
     }
     
     extracted_data = {}
@@ -179,6 +187,11 @@ def fill_form_with_extracted_data(pdf_path, extracted_data, word_positions, outp
             "mobile no.": "Phone Number",
             "First Name": "First Name",
             "Last Name": "Last Name",
+            "village*": "Village",
+            "district*": "District",
+            "state*": "State",
+            "pin*": "Pincode",
+            "Country Name*": "Country"
         }
 
         # Calculate a fixed width for each letter
@@ -246,7 +259,7 @@ def fill_pdf_form(pdf_path, extracted_data):
     # if not isinstance(extracted_data, dict):
     #     raise ValueError("extracted_data should be a dictionary")
 
-    search_words = [".name*", ".date of birth*", ".gender*", "address*", ".pan*", "mobile no."]  # List of words to find
+    search_words = [".name*", ".date of birth*", ".gender*", "address*", ".pan*", "mobile no.", "village*", "district*", "state*", "pin*", "country name*"]  # List of words to find
     word_positions = find_multiple_word_positions(pdf_path, search_words)
     print(f"Word Positions: {word_positions}")  # Debugging statement
     output_pdf_path = "uploads/filled_form.pdf"  # Output path for filled PDF
