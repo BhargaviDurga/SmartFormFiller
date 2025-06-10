@@ -10,7 +10,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 port = int(os.environ.get("PORT", 10000))  # Use Render's PORT
 app.run(host='0.0.0.0', port=port)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for simplicity
+CORS(app, resources={r"/*": {"origins": "https://bhargavidurga.github.io"}})  # Allow all origins for simplicity
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -88,4 +88,4 @@ def fill_form():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
